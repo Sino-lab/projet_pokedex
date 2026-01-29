@@ -1,15 +1,19 @@
-async function afficherFilms() {
-  const reponse = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
-  const films = await reponse.json();
-  console.log(films);
+const searchBtn = document.getElementById('searchBtn')
+
+searchBtn.addEventListener('click', () => {
+   searchPokemon()
+})
+
+async function searchPokemon() {
+    const valueFromTheUser = document.getElementById('input').value
+     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${valueFromTheUser}`)
+     if(!res.ok) {
+        alert('Une erreur est survenue, exemple pokemon inconnu')
+     } else {
+        const data = await res.json()
+        document.getElementById('pokemon').innerHTML = `
+        <p>${data.name}</p>
+        <img src=${data.sprites.front_default}>
+        `
+     }
 }
-
-
-
-
-
-
-<label for="site-search">Search the site:</label>
-<input type="search" id="site-search" name="q" />
-<button>Search</button>
-
