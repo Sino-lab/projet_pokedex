@@ -1,5 +1,6 @@
 const searchBtn = document.getElementById('searchBtn')
 
+
 searchBtn.addEventListener('click', () => {
    searchPokemon()
 })
@@ -14,6 +15,9 @@ async function searchPokemon() {
         document.getElementById('pokemon').innerHTML = `
         <p>${data.name}</p>
         <img src=${data.sprites.front_default}>
+        <p>${data.types[0].type.name}
         `
      }
 }
+
+
