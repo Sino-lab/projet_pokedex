@@ -1,4 +1,5 @@
 const searchBtn = document.getElementById('searchBtn')
+let historique = [] 
 searchBtn.addEventListener('click', () => {
    searchPokemon()
 })
@@ -11,10 +12,14 @@ async function searchPokemon() {
         alert('Une erreur est survenue, exemple pokemon inconnu')
     } else {
         const data = await res.json()
+        historique.push(data.name)
+        
         document.getElementById('pokemon').innerHTML = `
             <p>${data.name}</p>
             <img src=${data.sprites.front_default}>
             <p>${data.types[0].type.name}</p>
+            <p class="type" data-type="${data.types[0].type.name}">
+
             <button id="detailsBtn">Details</button>
         `
         
