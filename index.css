@@ -174,43 +174,38 @@ dialog {
     cursor: pointer;
 }
 
-/* ===== MOBILE VERSION ===== */
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
 
     body {
-        padding-top: 110px;
+        padding-top: 100px;
     }
 
     body::after {
-        font-size: 42px; /* logo plus petit */
+        font-size: 40px;
         letter-spacing: 4px;
     }
 
     #input {
-        width: 80%;
+        width: 85%;
         font-size: 14px;
+        margin-bottom: 10px;
     }
 
     #searchBtn {
-        width: 60%;
+        width: 85%;
         font-size: 14px;
     }
 
     #pokemon {
-        width: 85%;
+        width: 90%;
         padding: 18px;
     }
 
     #pokemon img {
-        width: 100px;
-    }
-
-    #pokemon p:first-child {
-        font-size: 16px;
+        width: 95px;
     }
 
     dialog {
-        width: 85%;
-        font-size: 14px;
+        width: 90%;
     }
 }
