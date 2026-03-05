@@ -3,16 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokédex</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <input id="input" placeholder="Search a Pokemon">
-    <button id="searchBtn">Search</button>
-    <div id="historique"></div>
-    <div id="pokemon"></div>
-    
+    <h1>Pokédex</h1>
+
+    <div class="search-container">
+        <input id="input" placeholder="Search a Pokemon">
+        <button id="searchBtn">Search</button>
+    </div>
+
+    <div class="main-grid">
+        <div id="historique" class="section"></div>
+        <div id="pokemon"></div>
+        <div id="favoris" class="section"></div>
+
+        <div class="recherche-complexe">
+            <p>Recherche avancée</p>
+            <div class="recherche-groupe">
+                <input id="inputType" type="text" placeholder="Type (ex: fire)">
+                <button onclick="rechercherParType()">Par type</button>
+            </div>
+            <div class="recherche-groupe">
+                <input id="inputGeneration" type="number" placeholder="Génération (1-9)">
+                <button onclick="rechercherParGeneration()">Par génération</button>
+            </div>
+            <div id="resultatsRecherche"></div>
+        </div>
+
+        <div id="recommandations" class="section"></div>
+    </div>
+
     <dialog id="modal">
         <button id="closeModal">✖</button>
         <div id="modalInfo"></div>

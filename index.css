@@ -1,211 +1,451 @@
-/* ===== BASE ===== */
-body {
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+    --rouge: #e63946;
+    --rouge-sombre: #c1121f;
+    --jaune: #ffd60a;
+    --bleu: #023e8a;
+    --bleu-clair: #0077b6;
+    --blanc: #f8f9fa;
+    --gris-clair: #e9ecef;
+    --gris: #adb5bd;
+    --sombre: #1a1a2e;
+    --sombre2: #16213e;
+    --ombre: 0 8px 32px rgba(0,0,0,0.3);
+    --radius: 16px;
+}
+
+* {
     margin: 0;
-    padding-top: 140px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--sombre);
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 119, 182, 0.15) 0%, transparent 50%);
+    font-family: 'Nunito', sans-serif;
+    color: var(--blanc);
     min-height: 100vh;
-    font-family: "Courier New", monospace;
-    background: radial-gradient(circle at center, #050a16, #02040a 80%);
-    color: #00ffe1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-}
-
-/* 🌌 GRID FUTURISTE */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        linear-gradient(rgba(0,255,225,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,225,0.07) 1px, transparent 1px);
-    background-size: 45px 45px;
-    z-index: -1;
-}
-
-/* 🕹️ LOGO PIXEL */
-body::after {
-    content: "POKEDEX";
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 64px;
-    font-weight: 900;
-    letter-spacing: 8px;
-    color: white;
-    text-shadow:
-        3px 3px 0 #bbb,
-        6px 6px 0 #888,
-        9px 9px 0 #444;
-}
-
-/* ===== SEARCH AREA ===== */
-#input {
-    padding: 12px 16px;
-    width: 260px;
-    border: 2px solid #00ffe1;
-    background: #000;
-    color: #00ffe1;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 0 12px #00ffe1 inset;
-}
-
-#searchBtn {
-    margin-top: 10px;
-    padding: 10px 22px;
-    border: 2px solid #00ffe1;
-    background: #001f1f;
-    color: #00ffe1;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 0 15px #00ffe1;
-    transition: 0.2s;
-}
-
-#searchBtn:hover {
-    background: #003333;
-    box-shadow: 0 0 25px #00ffe1;
-}
-
-/* ===== POKEMON SCREEN ===== */
-#pokemon {
-    margin-top: 60px;
-    width: 340px;
-    padding: 25px;
-    background: #001010;
-    border: 3px solid #00ffe1;
-    box-shadow: 0 0 30px #00ffe1;
-    text-align: center;
-    position: relative;
-}
-
-/* scanlines rétro */
-#pokemon::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0,0,0,0.15),
-        rgba(0,0,0,0.15) 2px,
-        transparent 2px,
-        transparent 4px
-    );
-    pointer-events: none;
-}
-
-/* Pokémon name */
-#pokemon p:first-child {
-    font-size: 20px;
-    letter-spacing: 3px;
-}
-
-/* sprite animé */
-#pokemon img {
-    width: 130px;
-    margin: 15px 0;
-    image-rendering: pixelated;
-    animation: float 2s infinite ease-in-out;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
-}
-
-/* ===== TYPE DISPLAY ===== */
-#pokemon p:nth-child(3) {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-/* Icônes de type */
-#pokemon p:nth-child(3):contains("electric")::before { content: "⚡"; color: #ffe600; }
-#pokemon p:nth-child(3):contains("water")::before { content: "💧"; color: #00bfff; }
-#pokemon p:nth-child(3):contains("fire")::before { content: "🔥"; color: #ff4d00; }
-#pokemon p:nth-child(3):contains("grass")::before { content: "🌿"; color: #00ff66; }
-
-/* ===== DETAILS BUTTON ===== */
-#pokemon button {
-    margin-top: 14px;
-    padding: 8px 18px;
-    background: #001f1f;
-    border: 2px solid #00ffe1;
-    color: #00ffe1;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 0 15px #00ffe1;
-    transition: 0.2s;
-}
-
-#pokemon button:hover {
-    background: #003333;
-    box-shadow: 0 0 25px #00ffe1;
-}
-
-/* ===== MODAL ===== */
-dialog {
-    background: #001010;
-    border: 3px solid #00ffe1;
-    color: #00ffe1;
-    box-shadow: 0 0 30px #00ffe1;
     padding: 20px;
 }
 
-#closeModal {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    color: #00ffe1;
-    font-size: 18px;
-    cursor: pointer;
+/* ===== HEADER ===== */
+h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    text-align: center;
+    color: var(--rouge);
+    text-shadow: 3px 3px 0px var(--rouge-sombre), 0 0 30px rgba(230,57,70,0.4);
+    margin-bottom: 30px;
+    padding-top: 20px;
+    letter-spacing: 2px;
 }
 
-@media screen and (max-width: 600px) {
+/* ===== BARRE DE RECHERCHE ===== */
+.search-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
 
+#input {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: 3px solid var(--rouge);
+    background: var(--sombre2);
+    color: var(--blanc);
+    width: min(350px, 100%);
+    outline: none;
+    transition: all 0.3s;
+}
+
+#input::placeholder {
+    color: var(--gris);
+}
+
+#input:focus {
+    border-color: var(--jaune);
+    box-shadow: 0 0 20px rgba(255, 214, 10, 0.3);
+}
+
+#searchBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    padding: 12px 20px;
+    background: var(--rouge);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+
+#searchBtn:hover {
+    background: var(--rouge-sombre);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+}
+
+#searchBtn:active {
+    transform: translateY(0);
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== SECTIONS GÉNÉRIQUES ===== */
+.section {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.section p:first-child {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    color: var(--jaune);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ===== BOUTONS POKÉMON (historique, favoris, recommandations) ===== */
+.section button {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    margin: 4px;
+    background: rgba(255,255,255,0.1);
+    color: var(--blanc);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: capitalize;
+}
+
+.section button:hover {
+    background: var(--rouge);
+    border-color: var(--rouge);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230,57,70,0.4);
+}
+
+/* Bouton supprimer favoris */
+.section button:has(+ button), button[style] {
+    background: transparent;
+}
+
+/* ===== CARTE POKÉMON ===== */
+#pokemon {
+    background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(0,119,182,0.15));
+    border: 2px solid rgba(230,57,70,0.4);
+    border-radius: var(--radius);
+    padding: 30px 20px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    grid-column: span 1;
+}
+
+#pokemon p {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    color: var(--blanc);
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+#pokemon img {
+    width: 130px;
+    height: 130px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 20px rgba(255,214,10,0.6));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#pokemon .type {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 4px 16px;
+    font-size: 0.75rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+#detailsBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    padding: 10px 18px;
+    background: var(--bleu-clair);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    margin: 4px;
+}
+
+#detailsBtn:hover {
+    background: var(--bleu);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,119,182,0.5);
+}
+
+#favoriBtn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 18px;
+    background: rgba(255,214,10,0.15);
+    color: var(--jaune);
+    border: 2px solid var(--jaune);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 4px;
+}
+
+#favoriBtn:hover {
+    background: var(--jaune);
+    color: var(--sombre);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,214,10,0.4);
+}
+
+/* ===== RECHERCHE COMPLEXE ===== */
+.recherche-complexe {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 20px;
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: end;
+}
+
+.recherche-complexe p {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    color: var(--jaune);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    grid-column: span 2;
+}
+
+.recherche-groupe {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.recherche-complexe input {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: var(--sombre2);
+    color: var(--blanc);
+    flex: 1;
+    min-width: 140px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.recherche-complexe input:focus {
+    border-color: var(--jaune);
+    box-shadow: 0 0 15px rgba(255,214,10,0.2);
+}
+
+.recherche-complexe input::placeholder {
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.recherche-complexe button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    padding: 10px 16px;
+    background: var(--bleu-clair);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+.recherche-complexe button:hover {
+    background: var(--bleu);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,119,182,0.4);
+}
+
+#resultatsRecherche {
+    grid-column: span 2;
+}
+
+#resultatsRecherche p:first-child {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    color: var(--jaune);
+    margin-bottom: 10px;
+}
+
+#resultatsRecherche button {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    margin: 4px;
+    background: rgba(255,255,255,0.1);
+    color: var(--blanc);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: capitalize;
+}
+
+#resultatsRecherche button:hover {
+    background: var(--bleu-clair);
+    border-color: var(--bleu-clair);
+    transform: translateY(-2px);
+}
+
+/* ===== MODAL ===== */
+#modal {
+    background: var(--sombre2);
+    border: 2px solid var(--rouge);
+    border-radius: var(--radius);
+    padding: 30px;
+    color: var(--blanc);
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--ombre), 0 0 60px rgba(230,57,70,0.2);
+}
+
+#modal::backdrop {
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+}
+
+#closeModal {
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--gris);
+    cursor: pointer;
+    float: right;
+    transition: color 0.2s;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+#closeModal:hover {
+    color: var(--rouge);
+}
+
+#modalInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    clear: both;
+}
+
+#modalInfo img {
+    width: 120px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 15px rgba(255,214,10,0.5));
+    animation: float 3s ease-in-out infinite;
+}
+
+#modalInfo p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 8px 20px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== RESPONSIVE TABLETTE ===== */
+@media (max-width: 900px) {
+    .main-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .recherche-complexe {
+        grid-column: span 2;
+    }
+
+    #resultatsRecherche {
+        grid-column: span 2;
+    }
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 600px) {
     body {
-        padding-top: 100px;
+        padding: 12px;
     }
 
-    body::after {
-        font-size: 40px;
-        letter-spacing: 4px;
+    .main-grid {
+        grid-template-columns: 1fr;
     }
 
-    #input {
-        width: 85%;
-        font-size: 14px;
-        margin-bottom: 10px;
+    .recherche-complexe {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
     }
 
-    #searchBtn {
-        width: 85%;
-        font-size: 14px;
+    .recherche-complexe p {
+        grid-column: span 1;
     }
 
-    #pokemon {
-        width: 90%;
-        padding: 18px;
+    #resultatsRecherche {
+        grid-column: span 1;
     }
 
-    #pokemon img {
-        width: 95px;
-    }
-
-    dialog {
-        width: 90%;
+    .recherche-groupe {
+        flex-direction: column;
     }
 }
