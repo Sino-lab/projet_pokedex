@@ -44,3 +44,19 @@ async function searchPokemon() {
         })
     }
 }
+
+function afficherHistorique() {
+    let historiqueDiv = document.getElementById('historique')
+
+    historiqueDiv.innerHTML = '<p>Historique des recherches :</p>'
+
+    for (let i = 0; i < historique.length; i++) {
+        const btn = document.createElement('button')
+        btn.textContent = historique[i]
+        btn.addEventListener('click', () => {
+            document.getElementById('input').value = historique[i]
+            searchPokemon()
+        })
+        historiqueDiv.appendChild(btn)
+    }
+}
