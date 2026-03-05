@@ -3,7 +3,6 @@ let historique = []
 searchBtn.addEventListener('click', () => {
    searchPokemon()
 })
-
 async function searchPokemon() {
     const valueFromTheUser = document.getElementById('input').value
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${valueFromTheUser}`)
@@ -13,13 +12,19 @@ async function searchPokemon() {
     } else {
         const data = await res.json()
         historique.push(data.name)
+
+        if (historique.length > 5) {
+            historique.shift()
+        }
+
+      
+        afficherHistorique()
         
         document.getElementById('pokemon').innerHTML = `
             <p>${data.name}</p>
             <img src=${data.sprites.front_default}>
             <p>${data.types[0].type.name}</p>
             <p class="type" data-type="${data.types[0].type.name}">
-
             <button id="detailsBtn">Details</button>
         `
         
@@ -47,9 +52,7 @@ async function searchPokemon() {
 
 function afficherHistorique() {
     let historiqueDiv = document.getElementById('historique')
-
     historiqueDiv.innerHTML = '<p>Historique des recherches :</p>'
-
     for (let i = 0; i < historique.length; i++) {
         const btn = document.createElement('button')
         btn.textContent = historique[i]
@@ -60,3 +63,38 @@ function afficherHistorique() {
         historiqueDiv.appendChild(btn)
     }
 }
+
+
+function getIdAleatoires() {
+    let ids = []
+    while (ids.length < 5) {
+        const nombreAleatoire = Math.floor(Math.random() * 151) + 1
+        // On évite les doublons
+        if (!ids.includes(nombreAleatoire)) {
+            ids.push(nombreAleatoire)
+        }
+    }
+    return ids
+}
+
+async function afficherRecommandations() {
+    const ids = getIdAleatoires()
+    const recommandationsDiv = document.getElementById('recommandations')
+
+    recommandationsDiv.innerHTML = '<p>Pokémon recommandés :</p>'
+
+    for (let i = 0; i < ids.length; i++) {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${ids[i]}`)
+        const data = await res.json()
+
+        const btn = document.createElement('button')
+        btn.textContent = data.name
+        btn.addEventListener('click', () => {
+            document.getElementById('input').value = data.name
+            searchPokemon()
+        })
+        recommandationsDiv.appendChild(btn)
+    }
+}
+
+afficherRecommandations()
